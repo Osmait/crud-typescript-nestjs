@@ -14,7 +14,6 @@ export class PostService {
   }
   public create(post: Post): void {
     post.id = randomUUID();
-
     this.logger.log('Save Post');
     this.fileManager.WriteFileRp(post);
   }
