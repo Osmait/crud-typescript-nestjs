@@ -24,4 +24,10 @@ describe('AppController (e2e)', () => {
   it('/post (GET)', () => {
     return request(app.getHttpServer()).get('/').expect(200);
   });
+  it('/post (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/post')
+      .send({ title: 'john', description: 'Prueba' })
+      .expect(201);
+  });
 });
