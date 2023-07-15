@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -33,5 +34,9 @@ export class PostController {
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     const destinationPath = `./uploads/${file.originalname}`;
     await fs.writeFile(destinationPath, file.buffer);
+  }
+  @Get('filter')
+  filter(@Query('user') user: string, @Query('edad') edad: number) {
+    console.log(user, edad);
   }
 }

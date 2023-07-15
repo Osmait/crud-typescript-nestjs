@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PostController } from './post.controller';
 import { PostService } from './post.service';
 import { Post } from './post.model';
-import { ModuleRef } from '@nestjs/core';
 import { FileManager } from './fileManager';
 
 describe('PostController', () => {
