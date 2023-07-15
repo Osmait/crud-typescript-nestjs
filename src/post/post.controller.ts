@@ -1,6 +1,16 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import * as fs from 'node:fs/promises';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { PostService } from './post.service';
 import { Post as postModel } from './post.model';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('post')
 export class PostController {
@@ -16,5 +26,12 @@ export class PostController {
   @HttpCode(201)
   public create(@Body() post: postModel): void {
     return this.postService.create(post);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const destinationPath = `./uploads/${file.originalname}`;
+    await fs.writeFile(destinationPath, file.buffer);
   }
 }
