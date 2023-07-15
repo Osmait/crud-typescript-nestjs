@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crudnode
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crudnode
+  template:
+    metadata:
+      labels:
+        app: crudnode
+    spec:
+      containers:
+        - name: crudnode
+          image: osmait/crud:node
+          ports:
+            - containerPort: 8000
